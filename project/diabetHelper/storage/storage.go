@@ -2,7 +2,13 @@ package storage
 
 import (
 	"context"
+	"errors"
 	"time"
+)
+
+var (
+	ErrUserAlreadyExists = errors.New("user with this id already exists")
+	ErrSLAlreadyExists   = errors.New("sugar level with this id already exists")
 )
 
 type SugarLevelStorage interface {
@@ -20,8 +26,8 @@ type UserStorage interface {
 }
 
 type User struct {
-	Id           string `db:"id"`
-	Username     string `db:"user_name"`
+	Id           int64  `db:"id"`
+	Username     string `db:"username"`
 	FirstName    string `db:"first_name"`
 	LastName     string `db:"last_name"`
 	LanguageCode string `db:"language_code"`
@@ -43,7 +49,7 @@ func NewSugarLevel(value string, userId int64) SugarLevel {
 	}
 }
 
-func NewUser(id, username, firstname, lastname, languageCode string) User {
+func NewUser(id int64, username, firstname, lastname, languageCode string) User {
 	return User{
 		Id:           id,
 		Username:     username,

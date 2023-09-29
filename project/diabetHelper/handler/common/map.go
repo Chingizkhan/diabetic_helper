@@ -13,3 +13,13 @@ func MapSLToPb(level storage.SugarLevel) *pb.SugarLevel {
 		UpdatedAt: level.UpdatedAt.Unix(),
 	}
 }
+
+func MapUserToPb(u storage.User) *pb.User {
+	return &pb.User{
+		Id:           u.Id,
+		Username:     u.Username,
+		FirstName:    u.FirstName,
+		LastName:     u.LastName,
+		LanguageCode: u.LanguageCode,
+	}
+}

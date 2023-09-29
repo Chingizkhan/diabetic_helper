@@ -3,7 +3,9 @@ package main
 import (
 	"diabetHelperTelegramBot/bot/bootstrap"
 	"diabetHelperTelegramBot/bot/command/add"
+	"diabetHelperTelegramBot/bot/command/help"
 	"diabetHelperTelegramBot/bot/command/poel"
+	"diabetHelperTelegramBot/bot/command/start"
 	"diabetHelperTelegramBot/bot/command/statistic"
 	"diabetHelperTelegramBot/bot/config"
 	tele "gopkg.in/telebot.v3"
@@ -35,7 +37,6 @@ func (u *User) Recipient() string {
 const (
 	me     = "395096494"
 	alihan = "1321034160"
-	some   = ""
 )
 
 func main() {
@@ -49,6 +50,14 @@ func main() {
 		log.Fatal(err)
 		return
 	}
+
+	b.Handle("/start", func(c tele.Context) error {
+		return start.Handle(c)
+	})
+
+	b.Handle("/help", func(c tele.Context) error {
+		return help.Handle(c)
+	})
 
 	b.Handle("/calc", func(c tele.Context) error {
 		return c.Send("Hello!")

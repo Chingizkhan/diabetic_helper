@@ -6,7 +6,7 @@ import (
 )
 
 func Handle(c tele.Context) error {
-	err := c.Send("Ok, I will remind you to check sugar level in 10 seconds!")
+	err := c.Send("Напомню вам измерить уровень глюкозы через 2 часа!")
 	if err != nil {
 		return err
 	}
@@ -20,8 +20,8 @@ func Handle(c tele.Context) error {
 }
 
 func checkSugarLevel(c tele.Context) error {
-	time.Sleep(time.Second * 10)
-	err := c.Send("It's time to check sugar!")
+	time.Sleep(time.Hour * 2)
+	err := c.Send("Время измерять глюкозу!🩸")
 	if err != nil {
 		return err
 	}

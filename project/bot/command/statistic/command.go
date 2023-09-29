@@ -27,6 +27,10 @@ func Handle(c tele.Context) error {
 		return err
 	}
 
+	if len(sl.Data) == 0 {
+		return c.Send("У вас нет записанных сахаров.")
+	}
+
 	average := CountAverage(sl)
 
 	//var sum float64
@@ -73,7 +77,7 @@ func Handle(c tele.Context) error {
 	//average := strconv.FormatFloat(sum, 'f', 1, 64)
 	//
 	//return c.Send(fmt.Sprintf("average: %v \n\nsugar levels: %v", average, res))
-	return c.Send(fmt.Sprintf("average: %s \n\nsugar levels: %v", average, m))
+	return c.Send(fmt.Sprintf("Среднее значение: %s \n\nСводка: %v", average, m))
 }
 
 func CountAverage(sl *pb.SugarLevels) (average string) {

@@ -19,9 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	DiabetHelper_AddSL_FullMethodName    = "/diabetHelper.DiabetHelper/AddSL"
-	DiabetHelper_UpdateSL_FullMethodName = "/diabetHelper.DiabetHelper/UpdateSL"
-	DiabetHelper_FindSL_FullMethodName   = "/diabetHelper.DiabetHelper/FindSL"
+	DiabetHelper_AddSL_FullMethodName      = "/diabetHelper.DiabetHelper/AddSL"
+	DiabetHelper_UpdateSL_FullMethodName   = "/diabetHelper.DiabetHelper/UpdateSL"
+	DiabetHelper_FindSL_FullMethodName     = "/diabetHelper.DiabetHelper/FindSL"
+	DiabetHelper_AddUser_FullMethodName    = "/diabetHelper.DiabetHelper/AddUser"
+	DiabetHelper_FindUser_FullMethodName   = "/diabetHelper.DiabetHelper/FindUser"
+	DiabetHelper_UpdateUser_FullMethodName = "/diabetHelper.DiabetHelper/UpdateUser"
 )
 
 // DiabetHelperClient is the client API for DiabetHelper service.
@@ -31,6 +34,9 @@ type DiabetHelperClient interface {
 	AddSL(ctx context.Context, in *AddSLRequest, opts ...grpc.CallOption) (*SugarLevel, error)
 	UpdateSL(ctx context.Context, in *UpdateSLRequest, opts ...grpc.CallOption) (*SugarLevel, error)
 	FindSL(ctx context.Context, in *FindSLRequest, opts ...grpc.CallOption) (*SugarLevels, error)
+	AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*User, error)
+	FindUser(ctx context.Context, in *FindUserRequest, opts ...grpc.CallOption) (*Users, error)
+	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*User, error)
 }
 
 type diabetHelperClient struct {
@@ -68,6 +74,33 @@ func (c *diabetHelperClient) FindSL(ctx context.Context, in *FindSLRequest, opts
 	return out, nil
 }
 
+func (c *diabetHelperClient) AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, DiabetHelper_AddUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diabetHelperClient) FindUser(ctx context.Context, in *FindUserRequest, opts ...grpc.CallOption) (*Users, error) {
+	out := new(Users)
+	err := c.cc.Invoke(ctx, DiabetHelper_FindUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *diabetHelperClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, DiabetHelper_UpdateUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DiabetHelperServer is the server API for DiabetHelper service.
 // All implementations must embed UnimplementedDiabetHelperServer
 // for forward compatibility
@@ -75,6 +108,9 @@ type DiabetHelperServer interface {
 	AddSL(context.Context, *AddSLRequest) (*SugarLevel, error)
 	UpdateSL(context.Context, *UpdateSLRequest) (*SugarLevel, error)
 	FindSL(context.Context, *FindSLRequest) (*SugarLevels, error)
+	AddUser(context.Context, *AddUserRequest) (*User, error)
+	FindUser(context.Context, *FindUserRequest) (*Users, error)
+	UpdateUser(context.Context, *UpdateUserRequest) (*User, error)
 	mustEmbedUnimplementedDiabetHelperServer()
 }
 
@@ -90,6 +126,15 @@ func (UnimplementedDiabetHelperServer) UpdateSL(context.Context, *UpdateSLReques
 }
 func (UnimplementedDiabetHelperServer) FindSL(context.Context, *FindSLRequest) (*SugarLevels, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindSL not implemented")
+}
+func (UnimplementedDiabetHelperServer) AddUser(context.Context, *AddUserRequest) (*User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
+}
+func (UnimplementedDiabetHelperServer) FindUser(context.Context, *FindUserRequest) (*Users, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindUser not implemented")
+}
+func (UnimplementedDiabetHelperServer) UpdateUser(context.Context, *UpdateUserRequest) (*User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
 func (UnimplementedDiabetHelperServer) mustEmbedUnimplementedDiabetHelperServer() {}
 
@@ -158,6 +203,60 @@ func _DiabetHelper_FindSL_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DiabetHelper_AddUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiabetHelperServer).AddUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiabetHelper_AddUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiabetHelperServer).AddUser(ctx, req.(*AddUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DiabetHelper_FindUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiabetHelperServer).FindUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiabetHelper_FindUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiabetHelperServer).FindUser(ctx, req.(*FindUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DiabetHelper_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiabetHelperServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DiabetHelper_UpdateUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiabetHelperServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DiabetHelper_ServiceDesc is the grpc.ServiceDesc for DiabetHelper service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -176,6 +275,18 @@ var DiabetHelper_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FindSL",
 			Handler:    _DiabetHelper_FindSL_Handler,
+		},
+		{
+			MethodName: "AddUser",
+			Handler:    _DiabetHelper_AddUser_Handler,
+		},
+		{
+			MethodName: "FindUser",
+			Handler:    _DiabetHelper_FindUser_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _DiabetHelper_UpdateUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
