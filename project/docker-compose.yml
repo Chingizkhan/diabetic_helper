@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  diabet-helper-service:
+    build:
+      context: .
+      dockerfile: diabetHelper.Dockerfile
+    ports:
+      - "1111:1111"
+    container_name: diabet-helper-service
+    networks:
+      - diabet-helper
+    volumes:
+      - ./diabetHelper:/app/diabetHelper
+      - ./proto:/app/proto
+    command: air main.go
+    depends_on:
+      - diabet-helper-postgres
+
+  diabet-helper-postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: app
+    container_name: diabet-helper-postgres
+    ports:
+      - "5461:5432"
+    networks:
+      - diabet-helper
+    volumes:
+      - diabet-helper_postgres:/var/lib/postgresql/data
+
+  diabet-helper-bot:
+    build:
+      context: .
+      dockerfile: diabetHelperBot.Dockerfile
+    ports:
+      - "1112:1112"
+    container_name: diabet-helper-bot
+    networks:
+      - diabet-helper
+    volumes:
+      - ./bot:/app/bot
+      - ./proto:/app/proto
+    command: air main.go
+    depends_on:
+      - diabet-helper-service
+
+networks:
+  diabet-helper:
+    driver: bridge
+    name: diabet-helper
+
+volumes:
+  diabet-helper_postgres:
