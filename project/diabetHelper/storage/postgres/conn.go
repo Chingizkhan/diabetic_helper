@@ -1,8 +1,10 @@
 package postgres
 
 import (
+	"diabetHelperTelegramBot/diabetHelper/config"
 	"fmt"
 	_ "github.com/jackc/pgx/v4/stdlib"
+	"github.com/jmoiron/sqlx"
 	"log"
 	"sync"
 	"time"

@@ -4,7 +4,7 @@ import (
 	"context"
 	"diabetHelperTelegramBot/diabetHelper/config"
 	"diabetHelperTelegramBot/diabetHelper/server/grpc/middleware"
-	pb "diabetHelperTelegramBot/proto"
+	pb "diabetHelperTelegramBot/proto/diabetHelper"
 	"google.golang.org/grpc"
 	"log"
 	"net"

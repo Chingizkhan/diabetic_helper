@@ -2,7 +2,7 @@ package common
 
 import (
 	"diabetHelperTelegramBot/diabetHelper/storage"
-	pb "diabetHelperTelegramBot/proto"
+	pb "diabetHelperTelegramBot/proto/diabetHelper"
 )
 
 func MapSLToPb(level storage.SugarLevel) *pb.SugarLevel {

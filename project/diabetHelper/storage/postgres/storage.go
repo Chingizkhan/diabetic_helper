@@ -139,7 +139,7 @@ func (s *Storage) GetCountAllForFind(ctx context.Context, dto storage.SugarLevel
 }
 
 func fillQueryForFind(qb *queryBuilder.QueryBuilder, dto storage.SugarLevelFindDTO) error {
-	if dto.UserId != "" {
+	if dto.UserId != 0 {
 		_ = qb.WhereEqual("sl.user_id", dto.UserId, queryBuilder.And)
 	}
 

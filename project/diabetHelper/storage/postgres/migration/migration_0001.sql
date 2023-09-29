@@ -1,5 +1,5 @@
 create table if not exists sugar_levels(
-    user_id     varchar(16),
+    user_id     int,
     "value"     varchar(4),
     created_at  timestamp(6),
     updated_at  timestamp(6)

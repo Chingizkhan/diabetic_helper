@@ -1,7 +1,7 @@
 package grpc
 
 import (
-	pb "diabetHelperTelegramBot/proto"
+	pb "diabetHelperTelegramBot/proto/diabetHelper"
 )
 
 type Server struct {

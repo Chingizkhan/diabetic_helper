@@ -28,13 +28,13 @@ type User struct {
 }
 
 type SugarLevel struct {
-	UserId    string    `db:"user_id"`
+	UserId    int64     `db:"user_id"`
 	Value     string    `db:"value"`
 	CreatedAt time.Time `db:"created_at"`
 	UpdatedAt time.Time `db:"updated_at"`
 }
 
-func NewSugarLevel(value, userId string) SugarLevel {
+func NewSugarLevel(value string, userId int64) SugarLevel {
 	return SugarLevel{
 		UserId:    userId,
 		Value:     value,
@@ -54,7 +54,7 @@ func NewUser(id, username, firstname, lastname, languageCode string) User {
 }
 
 type SugarLevelFindDTO struct {
-	UserId          string
+	UserId          int64
 	Value           string
 	CreatedAtStart  time.Time
 	CreatedAtFinish time.Time

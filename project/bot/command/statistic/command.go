@@ -3,7 +3,7 @@ package statistic
 import (
 	"context"
 	"diabetHelperTelegramBot/bot/service/grpc/diabet_helper"
-	pb "diabetHelperTelegramBot/proto"
+	pb "diabetHelperTelegramBot/proto/diabetHelper"
 	"fmt"
 	tele "gopkg.in/telebot.v3"
 	"log"
@@ -18,9 +18,8 @@ func Handle(c tele.Context) error {
 
 	sl, err := diabet_helper.NewClient().FindSL(ctx, &pb.FindSLRequest{
 		Pagination:      &pb.Pagination{Limit: -1},
-		Uuid:            "",
 		Value:           "",
-		Username:        c.Sender().Username,
+		UserId:          c.Sender().ID,
 		CreatedAtStart:  0,
 		CreatedAtFinish: 0,
 	})

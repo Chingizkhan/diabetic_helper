@@ -5,7 +5,7 @@ import (
 	"diabetHelperTelegramBot/diabetHelper/handler/add_sugar_level"
 	"diabetHelperTelegramBot/diabetHelper/handler/find_sugar_level"
 	"diabetHelperTelegramBot/diabetHelper/handler/update_sugar_level"
-	pb "diabetHelperTelegramBot/proto"
+	pb "diabetHelperTelegramBot/proto/diabetHelper"
 )
 
 func (s Server) AddSL(ctx context.Context, request *pb.AddSLRequest) (*pb.SugarLevel, error) {

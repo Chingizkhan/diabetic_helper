@@ -5,7 +5,7 @@ import (
 	"diabetHelperTelegramBot/diabetHelper/handler/common"
 	"diabetHelperTelegramBot/diabetHelper/storage/postgres"
 	"diabetHelperTelegramBot/diabetHelper/utils"
-	pb "diabetHelperTelegramBot/proto"
+	pb "diabetHelperTelegramBot/proto/diabetHelper"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"net/http"

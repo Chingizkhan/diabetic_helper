@@ -2,12 +2,12 @@ package find_sugar_level
 
 import (
 	"diabetHelperTelegramBot/diabetHelper/storage"
-	pb "diabetHelperTelegramBot/proto"
+	pb "diabetHelperTelegramBot/proto/diabetHelper"
 	"time"
 )
 
 type DTO struct {
-	UserId          string
+	UserId          int64
 	Value           string
 	CreatedAtStart  time.Time
 	CreatedAtFinish time.Time
@@ -15,7 +15,7 @@ type DTO struct {
 }
 
 func (dto *DTO) validate(req *pb.FindSLRequest) (err error) {
-	if req.UserId != "" {
+	if req.UserId != 0 {
 		dto.UserId = req.UserId
 	}
 

@@ -3,14 +3,14 @@ package diabet_helper
 import (
 	"context"
 	grpc "diabetHelperTelegramBot/bot/service"
-	pb "diabetHelperTelegramBot/proto"
+	"diabetHelperTelegramBot/proto/diabetHelper"
 	"fmt"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"net/http"
 )
 
-func (c ClientGrpc) AddSL(ctx context.Context, req *pb.AddSLRequest) (*pb.SugarLevel, error) {
+func (c ClientGrpc) AddSL(ctx context.Context, req *diabetHelper.AddSLRequest) (*diabetHelper.SugarLevel, error) {
 	clientConn, err := grpc.GetConn(ctx, c.addr)
 	defer func() {
 		if clientConn != nil {
@@ -22,7 +22,7 @@ func (c ClientGrpc) AddSL(ctx context.Context, req *pb.AddSLRequest) (*pb.SugarL
 	}
 
 	// Call gRPC method...
-	client := pb.NewDiabetHelperClient(clientConn)
+	client := diabetHelper.NewDiabetHelperClient(clientConn)
 	res, err := client.AddSL(ctx, req)
 	if ctx.Err() == context.DeadlineExceeded {
 		return nil, status.Error(codes.Code(http.StatusServiceUnavailable),
@@ -35,7 +35,7 @@ func (c ClientGrpc) AddSL(ctx context.Context, req *pb.AddSLRequest) (*pb.SugarL
 	return res, nil
 }
 
-func (c ClientGrpc) FindSL(ctx context.Context, req *pb.FindSLRequest) (*pb.SugarLevels, error) {
+func (c ClientGrpc) FindSL(ctx context.Context, req *diabetHelper.FindSLRequest) (*diabetHelper.SugarLevels, error) {
 	clientConn, err := grpc.GetConn(ctx, c.addr)
 	defer func() {
 		if clientConn != nil {
@@ -47,7 +47,7 @@ func (c ClientGrpc) FindSL(ctx context.Context, req *pb.FindSLRequest) (*pb.Suga
 	}
 
 	// Call gRPC method...
-	client := pb.NewDiabetHelperClient(clientConn)
+	client := diabetHelper.NewDiabetHelperClient(clientConn)
 	res, err := client.FindSL(ctx, req)
 	if ctx.Err() == context.DeadlineExceeded {
 		return nil, status.Error(codes.Code(http.StatusServiceUnavailable),

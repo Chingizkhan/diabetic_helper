@@ -3,7 +3,7 @@ package add
 import (
 	"context"
 	"diabetHelperTelegramBot/bot/service/grpc/diabet_helper"
-	pb "diabetHelperTelegramBot/proto"
+	pb "diabetHelperTelegramBot/proto/diabetHelper"
 	"errors"
 	tele "gopkg.in/telebot.v3"
 	"regexp"
@@ -23,8 +23,8 @@ func Handle(c tele.Context) error {
 	defer cancel()
 
 	_, err := diabet_helper.NewClient().AddSL(ctx, &pb.AddSLRequest{
-		Value:    sugarLevel,
-		Username: c.Sender().Username,
+		Value:  sugarLevel,
+		UserId: c.Sender().ID,
 	})
 	if err != nil {
 		return c.Send("Can not save sugar level - " + sugarLevel + err.Error())

@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"diabetHelperTelegramBot/diabetHelper/storage"
 	"diabetHelperTelegramBot/diabetHelper/storage/postgres"
-	pb "diabetHelperTelegramBot/proto"
+	pb "diabetHelperTelegramBot/proto/diabetHelper"
 	"errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

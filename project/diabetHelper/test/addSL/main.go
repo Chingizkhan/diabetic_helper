@@ -4,7 +4,7 @@ import (
 	"context"
 	"diabetHelperTelegramBot/diabetHelper/bootstrap"
 	"diabetHelperTelegramBot/diabetHelper/config"
-	pb "diabetHelperTelegramBot/proto"
+	"diabetHelperTelegramBot/proto/diabetHelper"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -35,7 +35,7 @@ func main() {
 		return
 	}
 
-	client := pb.NewDiabetHelperClient(conn)
+	client := diabetHelper.NewDiabetHelperClient(conn)
 
 	var n = 10
 	wg := sync.WaitGroup{}
@@ -44,7 +44,7 @@ func main() {
 	for i := 0; i < n; i++ {
 		go func(wg *sync.WaitGroup) {
 			defer wg.Done()
-			_, err := client.AddSL(ctx, &pb.AddSLRequest{
+			_, err := client.AddSL(ctx, &diabetHelper.AddSLRequest{
 				Value:    "12",
 				Username: "user",
 			})

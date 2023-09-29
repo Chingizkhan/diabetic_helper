@@ -4,7 +4,7 @@ import (
 	"context"
 	"diabetHelperTelegramBot/diabetHelper/bootstrap"
 	"diabetHelperTelegramBot/diabetHelper/config"
-	pb "diabetHelperTelegramBot/proto"
+	"diabetHelperTelegramBot/proto/diabetHelper"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -35,7 +35,7 @@ func main() {
 		return
 	}
 
-	client := pb.NewDiabetHelperClient(conn)
+	client := diabetHelper.NewDiabetHelperClient(conn)
 
 	wg := sync.WaitGroup{}
 	var n = 5000
@@ -49,10 +49,10 @@ func main() {
 
 var index int64
 
-func find(ctx context.Context, client pb.DiabetHelperClient, wg *sync.WaitGroup) *pb.SugarLevels {
+func find(ctx context.Context, client diabetHelper.DiabetHelperClient, wg *sync.WaitGroup) *diabetHelper.SugarLevels {
 	defer wg.Done()
-	point, err := client.FindSL(ctx, &pb.FindSLRequest{
-		Pagination: &pb.Pagination{
+	point, err := client.FindSL(ctx, &diabetHelper.FindSLRequest{
+		Pagination: &diabetHelper.Pagination{
 			Page:   0,
 			Limit:  10,
 			Offset: 0,
