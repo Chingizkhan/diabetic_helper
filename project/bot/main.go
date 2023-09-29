@@ -35,6 +35,7 @@ func (u *User) Recipient() string {
 const (
 	me     = "395096494"
 	alihan = "1321034160"
+	some   = ""
 )
 
 func main() {
