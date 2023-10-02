@@ -30,7 +30,7 @@ func Handle(c tele.Context) error {
 		return c.Send("Can not save sugar level - " + sugarLevel + err.Error())
 	}
 
-	return c.Send("Saved sugar level - " + sugarLevel)
+	return c.Send("Сохранено - " + sugarLevel)
 }
 
 var reInt = regexp.MustCompile("(?i)[0-9]+\\.[0-9]+")

@@ -11,7 +11,7 @@ func Logging(ctx context.Context, req interface{}, _ *grpc.UnaryServerInfo, hand
 	resp, err = handler(ctx, req)
 	if err != nil {
 		reqData, _ := json.Marshal(req)
-		log.Println(reqData)
+		log.Println("request:", string(reqData))
 		// todo: golemService.RegisterGrpcRequestWithError(string(reqData), err)
 	}
 
